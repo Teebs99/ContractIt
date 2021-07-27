@@ -26,8 +26,8 @@ namespace Data
         //[ForeignKey(nameof(Contractor))]
         //public int ContractorId { get; set; }
         //public Contractor Contractor { get; set; }
-        //[ForeignKey(nameof(Category))]
-        //public int CategoryId { get; set; }
-        //public Category Category { get; set; }
+        [ForeignKey(nameof(Category))]
+        public int Categoryid { get; set; }
+        public Category Category { get; set; }
     }
 }
