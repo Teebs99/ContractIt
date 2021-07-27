@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    class ContractorCreate
+    public class ContractorCreate
     {
         public string Name { get; set; }
         public string Description { get; set; }
