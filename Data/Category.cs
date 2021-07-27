@@ -28,7 +28,6 @@ namespace Data
         [Required]
         public double PriceRange { get; set; }
 
-        [Required]
         public DateTimeOffset CreatedUtc { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace ContractIt.Controllers
     {
         private CategoryService CreateCategoryService()
         {
+
             var categoryService = new CategoryService();
             return categoryService; 
         }
