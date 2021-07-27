@@ -34,6 +34,7 @@ namespace ContractIt.Models
             return new ApplicationDbContext();
         }
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
