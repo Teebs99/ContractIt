@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    class JobService
+    public class JobService
     {
         private Guid _userId;
         public JobService(Guid userId)
@@ -18,7 +18,7 @@ namespace Services
         }
         public bool AddJob(JobCreate model)
         {
-            var entity = new Job() { Title = model.Title, Description = model.Description, Address = model.Address, PhoneNumber = model.PhoneNumber };
+            var entity = new Job() { Title = model.Title, Description = model.Description, Address = model.Address, PhoneNumber = model.PhoneNumber, AuthorId = _userId };
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Jobs.Add(entity);
@@ -29,7 +29,7 @@ namespace Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Jobs.Where(q => q.AuthorId == _userId).Select(q => new JobListItem() { Title = q.Title, Description = q.Description });
+                var query = ctx.Jobs.Where(q => q.AuthorId == _userId).Select(q => new JobListItem() { Title = q.Title, Description = q.Description, Id = q.Id});
                 return query.ToArray();
             }
         }
@@ -37,9 +37,10 @@ namespace Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Jobs.Where(e => e.AuthorId == _userId).Single(e => e.Id == id);
+                var entity = ctx.Jobs.Single(e => e.Id == id && e.AuthorId == _userId);
                 return new JobDetail()
                 {
+                    Id = entity.Id,
                     Title = entity.Title,
                     Description = entity.Description,
                     PhoneNumber = entity.PhoneNumber,
@@ -47,11 +48,11 @@ namespace Services
                 };
             }
         }
-        public bool UpdateJob(int id, JobEdit model)
+        public bool UpdateJob(JobEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Jobs.Single(e => e.Id == id && e.AuthorId == _userId);
+                var entity = ctx.Jobs.Single(e => e.Id == model.Id && e.AuthorId == _userId);
                 entity.Title = model.Title;
                 entity.Description = model.Description;
                 entity.PhoneNumber = model.PhoneNumber;
