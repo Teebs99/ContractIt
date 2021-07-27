@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    class Contractor
+    public class Contractor
     {
         [Key]
         public int Id { get; set; }

@@ -75,6 +75,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContractorCreate.cs" />
+    <Compile Include="ContractorDetail.cs" />
+    <Compile Include="ContractorEdit.cs" />
+    <Compile Include="ContractorListItem.cs" />
     <Compile Include="JobCreate.cs" />
     <Compile Include="JobDetail.cs" />
     <Compile Include="JobEdit.cs" />
