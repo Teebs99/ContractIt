@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ContractIt.Models;
+using Data;
+using Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    class ContractorService
+    public class ContractorService
     {
         public bool AddContractor(ContractorCreate model)
         {
@@ -32,17 +35,18 @@ namespace Services
                 var entity = ctx.Contractors.Single(e => e.Id == id);
                 return new ContractorDetail()
                 {
+                    Id = entity.Id,
                     Name = entity.Name,
                     Description = entity.Description,
                     PhoneNumber = entity.PhoneNumber,
                 };
             }
         }
-        public bool UpdateContractor(int id, ContractorEdit model)
+        public bool UpdateContractor(ContractorEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Contractors.Single(e => e.Id == id);
+                var entity = ctx.Contractors.Single(e => e.Id == model.Id);
                 entity.Name = model.Name;
                 entity.Description = model.Description;
                 entity.PhoneNumber = model.PhoneNumber;
@@ -59,5 +63,4 @@ namespace Services
             }
         }
     }
-}
 }
