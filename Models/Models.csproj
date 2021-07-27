@@ -75,7 +75,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoryCreate.cs" />
+    <Compile Include="JobCreate.cs" />
+    <Compile Include="JobDetail.cs" />
+    <Compile Include="JobEdit.cs" />
+    <Compile Include="JobListItem.cs" />
+      <Compile Include="CategoryCreate.cs" />
     <Compile Include="CategoryDetail.cs" />
     <Compile Include="CategoryEdit.cs" />
     <Compile Include="CategoryListItem.cs" />

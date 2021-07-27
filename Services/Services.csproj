@@ -75,7 +75,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoryService.cs" />
+    <Compile Include="JobService.cs" />
+        <Compile Include="CategoryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,11 +85,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{e99e1c30-dbc3-4d19-a99b-6056eebb334f}</Project>
+      <Project>{E99E1C30-DBC3-4D19-A99B-6056EEBB334F}</Project>
       <Name>Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{c79b6646-771c-4d57-a866-3c80944b53a6}</Project>
+      <Project>{C79B6646-771C-4D57-A866-3C80944B53A6}</Project>
       <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
