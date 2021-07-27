@@ -24,22 +24,36 @@ namespace Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Contractors.Select(e => new ContractorListItem() { Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber });
-                return query.ToArray();
+                try
+                {
+                    var query = ctx.Contractors.Select(e => new ContractorListItem() { Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber });
+                    return query.ToArray();
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
         public ContractorDetail GetContractor(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Contractors.Single(e => e.Id == id);
-                return new ContractorDetail()
+                try
                 {
-                    Id = entity.Id,
-                    Name = entity.Name,
-                    Description = entity.Description,
-                    PhoneNumber = entity.PhoneNumber,
-                };
+                    var entity = ctx.Contractors.Single(e => e.Id == id);
+                    return new ContractorDetail()
+                    {
+                        Id = entity.Id,
+                        Name = entity.Name,
+                        Description = entity.Description,
+                        PhoneNumber = entity.PhoneNumber,
+                    };
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
         public bool UpdateContractor(ContractorEdit model)

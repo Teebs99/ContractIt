@@ -22,12 +22,16 @@ namespace ContractIt.Controllers
         {
             CategoryService categoryService = CreateCategoryService();
             var categories = categoryService.GetCategories();
+            if (categories == null)
+                return NotFound();
             return Ok(categories);
         }
         public IHttpActionResult GetById(int id)
         {
             CategoryService categoryService = CreateCategoryService();
             var category = categoryService.GetCategoryById(id);
+            if (category == null)
+                return NotFound();
             return Ok(category);
         }
         public IHttpActionResult Post(CategoryCreate category)
