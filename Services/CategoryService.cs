@@ -30,29 +30,44 @@ namespace Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Categories.Select(e => new CategoryListItem
+
+                try
                 {
-                    CategoryId = e.CategoryId,
-                    JobType = e.JobType,
-                    PriceRange = e.PriceRange,
-                    CreatedUtc = e.CreatedUtc
-                });
-                return query.ToArray(); 
+                    var query = ctx.Categories.Select(e => new CategoryListItem
+                    {
+                        CategoryId = e.CategoryId,
+                        JobType = e.JobType,
+                        CreatedUtc = e.CreatedUtc,
+                        PriceRange = e.PriceRange
+                    });
+                    return query.ToArray();
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
         public CategoryDetail GetCategoryById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Categories.Single(e => e.CategoryId == id);
-                return new CategoryDetail
+                try
                 {
-                    CategoryId = entity.CategoryId,
-                    JobType = entity.JobType,
-                    PriceRange = entity.PriceRange,
-                    Description = entity.Description,
-                    CreatedUtc = entity.CreatedUtc
-                };
+                    var entity = ctx.Categories.Single(e => e.CategoryId == id);
+                    return new CategoryDetail
+                    {
+                        CategoryId = entity.CategoryId,
+                        JobType = entity.JobType,
+                        PriceRange = entity.PriceRange,
+                        Description = entity.Description,
+                        CreatedUtc = entity.CreatedUtc
+                    };
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
         public bool UpdateCategory(CategoryEdit model)
