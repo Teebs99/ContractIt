@@ -31,19 +31,30 @@ namespace ContractIt.Controllers
         public IHttpActionResult GetContractors()
         {
             var service = CreateService();
-            var jobs = service.GetContractors();
-            if (jobs == null)
+            var items = service.GetContractors();
+            if (items == null)
                 return NotFound();
-            return Ok(jobs);
+            return Ok(items);
         }
+
+        [HttpGet]
+        public IHttpActionResult GetContractorsByCategory(int categoryId)
+        {
+            var service = CreateService();
+            var items = service.GetContractorsByCategory(categoryId);
+            if (items == null)
+                return NotFound();
+            return Ok(items);
+        }
+
         [HttpGet]
         public IHttpActionResult GetContractor(int id)
         {
             var service = CreateService();
-            var job = service.GetContractor(id);
-            if (job == null)
+            var item = service.GetContractor(id);
+            if (item == null)
                 return NotFound();
-            return Ok(job);
+            return Ok(item);
         }
         [HttpPut]
         public IHttpActionResult UpdateContractor(ContractorEdit model)

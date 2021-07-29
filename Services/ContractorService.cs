@@ -28,6 +28,18 @@ namespace Services
                 return query.ToArray();
             }
         }
+
+        public IEnumerable<ContractorListItem> GetContractorsByCategory(int categoryId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx.Contractors
+                    .Where(q => q.CategoryId == categoryId)
+                    .Select(e => new ContractorListItem() { Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber });
+                return query.ToArray();
+            }
+        }
+
         public ContractorDetail GetContractor(int id)
         {
             using (var ctx = new ApplicationDbContext())
