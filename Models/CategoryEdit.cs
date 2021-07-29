@@ -13,8 +13,7 @@ namespace Models
         public TypeOfWork JobType { get; set; }
         public double PriceRange { get; set; }
         public string Description { get; set; }
-        public Contractor Contractor { get; set; }
-        public int ContractorId { get; set; }
+        
 
     }
 }

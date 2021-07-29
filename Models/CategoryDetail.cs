@@ -18,7 +18,6 @@ namespace Models
         [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }
 
-        [Display(Name = "Contracter")]
-        public Contractor Contractor { get; set; }
+        
     }
 }

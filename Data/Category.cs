@@ -31,8 +31,6 @@ namespace Data
 
         public DateTimeOffset CreatedUtc { get; set; }
         
-        [ForeignKey(nameof(Contractor))]
-        public int ContractorId { get; set; }
-        public Contractor Contractor { get; set; }
+        
     }
 }
