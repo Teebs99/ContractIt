@@ -18,18 +18,34 @@ namespace ContractIt.Controllers
             var categoryService = new CategoryService();
             return categoryService; 
         }
+        [HttpGet]
         public IHttpActionResult Get()
         {
             CategoryService categoryService = CreateCategoryService();
             var categories = categoryService.GetCategories();
+            if (categories == null)
+                return NotFound();
             return Ok(categories);
         }
+        [HttpGet]
         public IHttpActionResult GetById(int id)
         {
             CategoryService categoryService = CreateCategoryService();
             var category = categoryService.GetCategoryById(id);
+            if (category == null)
+                return NotFound();
             return Ok(category);
         }
+        [HttpGet]
+        public IHttpActionResult GetCategoriesByContractor(int ContractorId)
+        {
+            var service = CreateCategoryService();
+            var categories = service.GetCategoryByContractor(ContractorId);
+            if (categories == null)
+                return NotFound();
+            return Ok(categories);
+        }
+        [HttpPost]
         public IHttpActionResult Post(CategoryCreate category)
         {
             if (!ModelState.IsValid)
@@ -42,7 +58,7 @@ namespace ContractIt.Controllers
 
             return Ok();
         }
-
+        [HttpPut]
         public IHttpActionResult Put(CategoryEdit category)
         {
             if (!ModelState.IsValid)
@@ -55,7 +71,7 @@ namespace ContractIt.Controllers
 
             return Ok();
         }
-
+        [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             var service = CreateCategoryService();

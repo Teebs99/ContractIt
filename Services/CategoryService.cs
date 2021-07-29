@@ -18,10 +18,12 @@ namespace Services
                 JobType = model.JobType,
                 PriceRange = model.PriceRange,
                 Description = model.Description,
+                ContractorId = model.ContractorId,
                 CreatedUtc = DateTimeOffset.Now
             };
             using (var ctx = new ApplicationDbContext())
             {
+                entity.Contractor = ctx.Contractors.Find(entity.ContractorId);
                 ctx.Categories.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
@@ -30,28 +32,68 @@ namespace Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Categories.Select(e => new CategoryListItem
+
+                try
                 {
-                    CategoryId = e.CategoryId,
-                    JobType = e.JobType,
-                    CreatedUtc = e.CreatedUtc
-                });
-                return query.ToArray(); 
+                    var query = ctx.Categories.Select(e => new CategoryListItem
+                    {
+                        CategoryId = e.CategoryId,
+                        JobType = e.JobType,
+                        CreatedUtc = e.CreatedUtc,
+                        PriceRange = e.PriceRange,
+                        Contractor = e.Contractor
+                    });
+                    return query.ToArray();
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
         public CategoryDetail GetCategoryById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Categories.Single(e => e.CategoryId == id);
-                return new CategoryDetail
+                try
                 {
-                    CategoryId = entity.CategoryId,
-                    JobType = entity.JobType,
-                    PriceRange = entity.PriceRange,
-                    Description = entity.Description,
-                    CreatedUtc = entity.CreatedUtc
-                };
+                    var entity = ctx.Categories.Single(e => e.CategoryId == id);
+                    return new CategoryDetail
+                    {
+                        CategoryId = entity.CategoryId,
+                        JobType = entity.JobType,
+                        PriceRange = entity.PriceRange,
+                        Description = entity.Description,
+                        Contractor = ctx.Contractors.Find(entity.ContractorId),
+                        CreatedUtc = entity.CreatedUtc
+                    };
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+        public IEnumerable<CategoryListItem> GetCategoryByContractor(int ContractorId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                try
+                {
+                    var categories = ctx.Categories
+                    .Where(c => c.ContractorId == ContractorId)
+                    .Select(c => new CategoryListItem()
+                    {
+                        JobType = c.JobType,
+                        PriceRange = c.PriceRange,
+                        Contractor = c.Contractor
+                    });
+                    return categories.ToArray();
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
         public bool UpdateCategory(CategoryEdit model)
@@ -63,6 +105,8 @@ namespace Services
                 entity.JobType = model.JobType;
                 entity.PriceRange = model.PriceRange;
                 entity.Description = model.Description;
+                entity.Contractor = model.Contractor;
+                entity.ContractorId = model.ContractorId;
 
                 return ctx.SaveChanges() == 1;
             }

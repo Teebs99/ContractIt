@@ -46,6 +46,15 @@ namespace ContractIt.Controllers
                 return NotFound();
             return Ok(job);
         }
+        [HttpGet]
+        public IHttpActionResult GetJobsByCategory(int CategoryId)
+        {
+            var service = CreateService();
+            var jobs = service.GetJobsByCategory(CategoryId);
+            if (jobs == null)
+                return NotFound();
+            return Ok(jobs);
+        }
         [HttpPut]
         public IHttpActionResult UpdateJob(JobEdit model)
         {
