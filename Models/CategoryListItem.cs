@@ -21,6 +21,8 @@ namespace Models
 
         [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }
+        public Contractor Contractor { get; set; }
+
 
     }
 }

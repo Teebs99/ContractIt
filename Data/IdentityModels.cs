@@ -28,14 +28,14 @@ namespace ContractIt.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Category> Categories { get; set; }
-         public DbSet<Contractor> Contractors { get; set; }
+        public DbSet<Contractor> Contractors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
