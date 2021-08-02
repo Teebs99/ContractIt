@@ -33,7 +33,7 @@ namespace Data
         //public Contractor Contractor { get; set; }
 
         [ForeignKey(nameof(Category))]
-        public int Categoryid { get; set; }
+        public int? Categoryid { get; set; }
         public virtual Category Category { get; set; }
     }
 }

@@ -91,9 +91,25 @@ namespace Services
             {
                 var entity = ctx.Categories.Single(e => e.CategoryId == categoryId);
 
+                var jobs = ctx.Jobs.Where(j => j.Categoryid == categoryId).ToArray();
+
+                var contractors = ctx.Contractors.Where(j => j.CategoryId == categoryId).ToArray();
+
+                foreach(Job job in jobs)
+                {
+                    job.Categoryid = null;
+                    job.Category = null;
+                }
+                foreach (Contractor c in contractors)
+                {
+                    c.CategoryId = null;
+                    c.Category = null;
+                }
+
+
                 ctx.Categories.Remove(entity);
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() >= 1;
             }
         }
     }
