@@ -92,5 +92,45 @@ namespace Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public ContractorDetailReviews GetContractorReviews(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                try
+                {
+                    var entity = ctx.Contractors.Single(e => e.Id == id);
+                    return new ContractorDetailReviews()
+                    {
+                        Id = entity.Id,
+                        Name = entity.Name,
+                        Description = entity.Description,
+                        PhoneNumber = entity.PhoneNumber,
+                        Reviews = entity.Reviews,
+                    };
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        public bool AddReviewForContractor(ContractorReview review)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                try
+                {
+                    var entity = ctx.Contractors.Single(e => e.Id == review.Id);
+                    entity.Reviews.Add(review.Review);
+                    return ctx.SaveChanges() == 1;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
     }
 }
