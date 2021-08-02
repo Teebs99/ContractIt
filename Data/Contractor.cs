@@ -20,10 +20,11 @@ namespace Data
 
         [Required]
         public string PhoneNumber { get; set; }
-        [ForeignKey(nameof(Contractor))]
+        [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
 
-        public List<string> Reviews { get; set; }
+        virtual public Category Category { get; set; }
+      public List<string> Reviews { get; set; }
+
     }
 }

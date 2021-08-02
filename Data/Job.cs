@@ -34,6 +34,6 @@ namespace Data
 
         [ForeignKey(nameof(Category))]
         public int Categoryid { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

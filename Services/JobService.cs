@@ -21,7 +21,9 @@ namespace Services
             var entity = new Job() { Title = model.Title, Description = model.Description, Address = model.Address, PhoneNumber = model.PhoneNumber, AuthorId = _userId, Categoryid = model.CategoryId };
             using (var ctx = new ApplicationDbContext())
             {
+                
                 entity.Category = ctx.Categories.Find(entity.Categoryid);
+                
                 ctx.Jobs.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
