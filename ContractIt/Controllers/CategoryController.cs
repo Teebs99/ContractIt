@@ -36,15 +36,7 @@ namespace ContractIt.Controllers
                 return NotFound();
             return Ok(category);
         }
-        [HttpGet]
-        public IHttpActionResult GetCategoriesByContractor(int ContractorId)
-        {
-            var service = CreateCategoryService();
-            var categories = service.GetCategoryByContractor(ContractorId);
-            if (categories == null)
-                return NotFound();
-            return Ok(categories);
-        }
+        
         [HttpPost]
         public IHttpActionResult Post(CategoryCreate category)
         {

@@ -13,9 +13,10 @@ namespace Services
     {
         public bool AddContractor(ContractorCreate model)
         {
-            var entity = new Contractor() { Name = model.Name, Description = model.Description, PhoneNumber = model.PhoneNumber };
+            var entity = new Contractor() { Name = model.Name, Description = model.Description, PhoneNumber = model.PhoneNumber, CategoryId = model.CategoryId };
             using (var ctx = new ApplicationDbContext())
             {
+                entity.Category = ctx.Categories.Find(entity.CategoryId);
                 ctx.Contractors.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
@@ -26,7 +27,7 @@ namespace Services
             {
                 try
                 {
-                    var query = ctx.Contractors.Select(e => new ContractorListItem() { Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber });
+                    var query = ctx.Contractors.Select(e => new ContractorListItem() { Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber, Category = e.Category });
                     return query.ToArray();
                 }
                 catch
@@ -42,7 +43,7 @@ namespace Services
             {
                 var query = ctx.Contractors
                     .Where(q => q.CategoryId == categoryId)
-                    .Select(e => new ContractorListItem() { Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber });
+                    .Select(e => new ContractorListItem() { Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber, Category = e.Category });
                 return query.ToArray();
             }
         }
@@ -60,6 +61,7 @@ namespace Services
                         Name = entity.Name,
                         Description = entity.Description,
                         PhoneNumber = entity.PhoneNumber,
+                        Category = ctx.Categories.Find(entity.CategoryId)
                     };
                 }
                 catch
@@ -76,6 +78,8 @@ namespace Services
                 entity.Name = model.Name;
                 entity.Description = model.Description;
                 entity.PhoneNumber = model.PhoneNumber;
+                entity.Category = model.Category;
+                entity.CategoryId = model.CategoryId;
                 return ctx.SaveChanges() == 1;
             }
         }
