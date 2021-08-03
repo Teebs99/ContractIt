@@ -94,8 +94,8 @@ namespace Services
                 entity.Description = model.Description;
                 entity.PhoneNumber = model.PhoneNumber;
                 entity.Address = model.Address;
-                entity.Category = model.Category;
                 entity.Categoryid = model.CategoryId;
+                entity.Category = ctx.Categories.Find(model.CategoryId);
                 return ctx.SaveChanges() == 1;
             }
         }

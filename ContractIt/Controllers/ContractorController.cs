@@ -75,25 +75,25 @@ namespace ContractIt.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public IHttpActionResult GetContractorReviews(int id)
-        {
-            var service = CreateService();
-            var item = service.GetContractorReviews(id);
-            if (item == null)
-                return NotFound();
-            return Ok(item);
-        }
+        //[HttpGet]
+        //public IHttpActionResult GetContractorReviews(int id)
+        //{
+        //    var service = CreateService();
+        //    var item = service.GetContractorReviews(id);
+        //    if (item == null)
+        //        return NotFound();
+        //    return Ok(item);
+        //}
 
-        [HttpPut]
-        public IHttpActionResult AddReviewForContractor(ContractorReview review)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest();
-            var service = CreateService();
-            if (!service.AddReviewForContractor(review))
-                return InternalServerError();
-            return Ok();
-        }
+        //[HttpPut]
+        //public IHttpActionResult AddReviewForContractor(ContractorReview review)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest();
+        //    var service = CreateService();
+        //    if (!service.AddReviewForContractor(review))
+        //        return InternalServerError();
+        //    return Ok();
+        //}
     }
 }

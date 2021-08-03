@@ -27,7 +27,7 @@ namespace Services
             {
                 try
                 {
-                    var query = ctx.Contractors.Select(e => new ContractorListItem() { Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber, Category = e.Category });
+                    var query = ctx.Contractors.Select(e => new ContractorListItem() { Id = e.Id, Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber, Category = e.Category });
                     return query.ToArray();
                 }
                 catch
@@ -43,7 +43,7 @@ namespace Services
             {
                 var query = ctx.Contractors
                     .Where(q => q.CategoryId == categoryId)
-                    .Select(e => new ContractorListItem() { Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber, Category = e.Category });
+                    .Select(e => new ContractorListItem() { Id = e.Id, Name = e.Name, Description = e.Description, PhoneNumber = e.PhoneNumber, Category = e.Category });
                 return query.ToArray();
             }
         }
@@ -93,28 +93,28 @@ namespace Services
             }
         }
 
-        public ContractorDetailReviews GetContractorReviews(int id)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                try
-                {
-                    var entity = ctx.Contractors.Single(e => e.Id == id);
-                    return new ContractorDetailReviews()
-                    {
-                        Id = entity.Id,
-                        Name = entity.Name,
-                        Description = entity.Description,
-                        PhoneNumber = entity.PhoneNumber,
-                        Reviews = entity.Reviews,
-                    };
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-        }
+        //public ContractorDetailReviews GetContractorReviews(int id)
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        try
+        //        {
+        //            var entity = ctx.Contractors.Single(e => e.Id == id);
+        //            return new ContractorDetailReviews()
+        //            {
+        //                Id = entity.Id,
+        //                Name = entity.Name,
+        //                Description = entity.Description,
+        //                PhoneNumber = entity.PhoneNumber,
+        //                Reviews = entity.Reviews,
+        //            };
+        //        }
+        //        catch
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //}
 
         public bool AddReviewForContractor(ContractorReview review)
         {
