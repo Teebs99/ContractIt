@@ -8,7 +8,7 @@ This project is designed to be a service to connect home owners and contractors.
 ### API Requests
 
 #### Job
-`POST api/Job` In order to create a job posting there are a few things that we need.  
+*`POST api/Job` In order to create a job posting there are a few things that we need.  
 1. Title - This is a string used to briefly describe the work  
 1. Description - This is a string that further clarifies the scope of the work needed by the contractor  
 1. Phone Number - A string that should allow the contractor to call the user who posted the job  
@@ -16,14 +16,14 @@ This project is designed to be a service to connect home owners and contractors.
 1. AuthorId - This is handled on the backend when the user registers for the app   
 1. Categoryid - This assigns the Job to a specific category. This is required and the category must exist before a job can be posted  
 
-`GET api/Job` A plain get request will return a list of all jobs posted by the user. If this list is empty it will return a 404.
+*`GET api/Job` A plain get request will return a list of all jobs posted by the user. If this list is empty it will return a 404.
 
-`GET api/Job/{id}` A GET request with an id will search for the job posted by the user with that id. If none exist it will return a 404
+*`GET api/Job/{id}` A GET request with an id will search for the job posted by the user with that id. If none exist it will return a 404
 
-`GET api/Job?CategoryId={CategoryId}` This GET request is designed to return a list of jobs posted by the user that share the same category. If none are found then it will return a 404.
+*`GET api/Job?CategoryId={CategoryId}` This GET request is designed to return a list of jobs posted by the user that share the same category. If none are found then it will return a 404.
 
-`PUT api/Job` A PUT request requires the same information as the POST request and is used to update the job posting. All information is required.
+*`PUT api/Job` A PUT request requires the same information as the POST request and is used to update the job posting. All information is required.
 
-`DELETE api/Job/{id}` This deletes the job from the database
+*`DELETE api/Job/{id}` This deletes the job from the database
 #### Contractor
 #### Category
