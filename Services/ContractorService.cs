@@ -116,21 +116,21 @@ namespace Services
         //    }
         //}
 
-        public bool AddReviewForContractor(ContractorReview review)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                try
-                {
-                    var entity = ctx.Contractors.Single(e => e.Id == review.Id);
-                    entity.Reviews.Add(review.Review);
-                    return ctx.SaveChanges() == 1;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
+        //public bool AddReviewForContractor(ContractorReview review)
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        try
+        //        {
+        //            var entity = ctx.Contractors.Single(e => e.Id == review.Id);
+        //            entity.Reviews.Add(review.Review);
+        //            return ctx.SaveChanges() == 1;
+        //        }
+        //        catch
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //}
     }
 }

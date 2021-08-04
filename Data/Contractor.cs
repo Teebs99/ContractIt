@@ -23,7 +23,7 @@ namespace Data
         [ForeignKey(nameof(Category))]
         public int? CategoryId { get; set; }
         virtual public Category Category { get; set; }
-      public List<string> Reviews { get; set; }
+      //public List<string> Reviews { get; set; }
 
     }
 }

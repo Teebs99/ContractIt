@@ -481,12 +481,80 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:ContractIt.Controllers.CategoryController.Get">
+            <summary>
+            Get all categories
+            </summary>
+            <returns>Returns a list of all categories, the list can be empty</returns>
+        </member>
+        <member name="M:ContractIt.Controllers.CategoryController.GetById(System.Int32)">
+            <summary>
+            Get a specific category by their Id
+            </summary>
+            <param name="id">The id of the category</param>
+            <returns>Returns a detailed view of the category</returns>
+        </member>
+        <member name="M:ContractIt.Controllers.CategoryController.Post(Models.CategoryCreate)">
+            <summary>
+            Creates a new category
+            </summary>
+            <param name="category">Requires: JobType, PriceRange, Description</param>
+            <returns>Returns a 200 when succesfully created</returns>
+        </member>
+        <member name="M:ContractIt.Controllers.CategoryController.Put(Models.CategoryEdit)">
+            <summary>
+            Allows for the information of the category to be updated
+            </summary>
+            <param name="category">Requires: JobType, Price Range, Description</param>
+            <returns>Returns a 200 when successfully updated</returns>
+        </member>
+        <member name="M:ContractIt.Controllers.CategoryController.Delete(System.Int32)">
+            <summary>
+            This deletes the category from the database. Job postings and contractor are dependent on categories. So, before it is deleted all jobs and contractors attached to this category have their category set to null. This prevents a cascade on delete.
+            </summary>
+            <param name="id">Id of the category to be deleted</param>
+            <returns>Returns a 200 when successfully deleted</returns>
+        </member>
         <member name="M:ContractIt.Controllers.ContractorController.CreateContractor(Models.ContractorCreate)">
             <summary>
             This create a contractor within the database.
             </summary>
-            <param name="model">Model must contain </param>
-            <returns></returns>
+            <param name="model">Model must contain name, description, phone number, and category id</param>
+            <returns>Returns 200 when the contractor is successfully created</returns>
+        </member>
+        <member name="M:ContractIt.Controllers.ContractorController.GetContractors">
+            <summary>
+            Retrieves all contractors from the server
+            </summary>
+            <returns>Returns a list of contractors, the list can be empty</returns>
+        </member>
+        <member name="M:ContractIt.Controllers.ContractorController.GetContractorsByCategory(System.Int32)">
+            <summary>
+            Gather all contractors based on the category of work that they do
+            </summary>
+            <param name="categoryId">The id of the category you are searching for</param>
+            <returns>Returns a list of contractors with the same category, the list can be empty</returns>
+        </member>
+        <member name="M:ContractIt.Controllers.ContractorController.GetContractor(System.Int32)">
+            <summary>
+            Search for a specific contractor by their Id
+            </summary>
+            <param name="id">The id of the contractor you are searching for</param>
+            <returns>A detailed view of the contractor</returns>
+        </member>
+        <member name="M:ContractIt.Controllers.ContractorController.UpdateContractor(Models.ContractorEdit)">
+            <summary>
+            Allows for the update to the contractor's information
+            </summary>
+            <param name="model">To update a contractor it requires: Name, Description, Phone Number, CategoryId</param>
+            <returns>Returns a 200 when successfully updated</returns>
+        </member>
+        <member name="M:ContractIt.Controllers.ContractorController.DeleteContractor(System.Int32)">
+            <summary>
+            Deletes the contractor from the database
+            </summary>
+            <param name="id">Id of the contractor to be deleted</param>
+            <returns>Returns a 200 when successfully deleted</returns>
         </member>
         <member name="M:ContractIt.Controllers.JobController.CreateJob(Models.JobCreate)">
             <summary>
