@@ -17,7 +17,12 @@ namespace ContractIt.Controllers
             var id = Guid.Parse(User.Identity.GetUserId());
             return new JobService(id);
         }
-
+        
+        /// <summary>
+        /// Creates a Job Posting
+        /// </summary>
+        /// <param name="model">The required information for the Job Posting</param>
+        /// <returns>Returns 200 When Successful</returns>
         [HttpPost]
         public IHttpActionResult CreateJob(JobCreate model)
         {
@@ -28,6 +33,10 @@ namespace ContractIt.Controllers
                 return InternalServerError();
             return Ok();
         }
+        /// <summary>
+        /// Retrieves job postings by the user
+        /// </summary>
+        /// <returns>Returns list of jobs, can be an empty list</returns>
         [HttpGet]
         public IHttpActionResult GetJobs()
         {
@@ -37,6 +46,11 @@ namespace ContractIt.Controllers
                 return NotFound();
             return Ok(jobs);
         }
+        /// <summary>
+        /// Search for a job by it's id
+        /// </summary>
+        /// <param name="id">The Id of the job you want to look at</param>
+        /// <returns>Returns a detailed view of the job posting</returns>
         [HttpGet]
         public IHttpActionResult GetJob(int id)
         {
@@ -46,6 +60,11 @@ namespace ContractIt.Controllers
                 return NotFound();
             return Ok(job);
         }
+        /// <summary>
+        /// Gather all jobs postings by the user within a certain category
+        /// </summary>
+        /// <param name="CategoryId">The id of the category you are looking at</param>
+        /// <returns>Returns list of jobs with the same category, can return an empty list</returns>
         [HttpGet]
         public IHttpActionResult GetJobsByCategory(int CategoryId)
         {
@@ -55,6 +74,11 @@ namespace ContractIt.Controllers
                 return NotFound();
             return Ok(jobs);
         }
+        /// <summary>
+        /// Allows the user to update the job posting
+        /// </summary>
+        /// <param name="model">The required information for a normal job posting</param>
+        /// <returns>Returns 200 when successful</returns>
         [HttpPut]
         public IHttpActionResult UpdateJob(JobEdit model)
         {
@@ -65,6 +89,11 @@ namespace ContractIt.Controllers
                 return InternalServerError();
             return Ok();
         }
+        /// <summary>
+        /// Deletes the job posting
+        /// </summary>
+        /// <param name="id">Id of job posting to be deleted</param>
+        /// <returns>Returns 200 when successful</returns>
         [HttpDelete]
         public IHttpActionResult DeleteJob(int id)
         {

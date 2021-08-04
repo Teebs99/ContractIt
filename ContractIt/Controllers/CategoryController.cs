@@ -18,6 +18,10 @@ namespace ContractIt.Controllers
             var categoryService = new CategoryService();
             return categoryService; 
         }
+        /// <summary>
+        /// Get all categories
+        /// </summary>
+        /// <returns>Returns a list of all categories, the list can be empty</returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -27,6 +31,11 @@ namespace ContractIt.Controllers
                 return NotFound();
             return Ok(categories);
         }
+        /// <summary>
+        /// Get a specific category by their Id
+        /// </summary>
+        /// <param name="id">The id of the category</param>
+        /// <returns>Returns a detailed view of the category</returns>
         [HttpGet]
         public IHttpActionResult GetById(int id)
         {
@@ -36,7 +45,11 @@ namespace ContractIt.Controllers
                 return NotFound();
             return Ok(category);
         }
-        
+        /// <summary>
+        /// Creates a new category
+        /// </summary>
+        /// <param name="category">Requires: JobType, PriceRange, Description</param>
+        /// <returns>Returns a 200 when succesfully created</returns>
         [HttpPost]
         public IHttpActionResult Post(CategoryCreate category)
         {
@@ -50,6 +63,11 @@ namespace ContractIt.Controllers
 
             return Ok();
         }
+        /// <summary>
+        /// Allows for the information of the category to be updated
+        /// </summary>
+        /// <param name="category">Requires: JobType, Price Range, Description</param>
+        /// <returns>Returns a 200 when successfully updated</returns>
         [HttpPut]
         public IHttpActionResult Put(CategoryEdit category)
         {
@@ -63,6 +81,11 @@ namespace ContractIt.Controllers
 
             return Ok();
         }
+        /// <summary>
+        /// This deletes the category from the database. Job postings and contractor are dependent on categories. So, before it is deleted all jobs and contractors attached to this category have their category set to null. This prevents a cascade on delete.
+        /// </summary>
+        /// <param name="id">Id of the category to be deleted</param>
+        /// <returns>Returns a 200 when successfully deleted</returns>
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
