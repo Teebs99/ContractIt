@@ -1,21 +1,14 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Models
 {
-    public enum TypeOfWork
-    {
-        Electrical,
-        Plumbing,
-        Landscaping,
-        Miscellaneous 
-    }
-    public class Category
+    public class CategoryListItem
     {
         [Key]
         public int CategoryId { get; set; }
@@ -24,13 +17,12 @@ namespace Data
         public TypeOfWork JobType { get; set; }
 
         [Required]
-        public string Description { get; set; }
-
-        [Required]
         public double PriceRange { get; set; }
 
+        [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }
         
-        
+
+
     }
 }
